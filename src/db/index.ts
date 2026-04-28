@@ -1,5 +1,8 @@
-import { drizzle } from "drizzle-orm/node-postgres";
+import { neon } from "@neondatabase/serverless";
+import { config } from "dotenv";
+import { drizzle } from "drizzle-orm/neon-http";
 
-import * as schema from "./schema.ts";
+config({ path: [".env.local", ".env"] });
 
-export const db = drizzle(process.env.DATABASE_URL as string, { schema });
+const sql = neon(process.env.DATABASE_URL as string);
+export const db = drizzle({ client: sql });
