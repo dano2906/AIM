@@ -7,8 +7,7 @@ export async function getClient() {
 		return undefined;
 	}
 	if (!client) {
-		// biome-ignore lint/style/noNonNullAssertion: <explanation>
-		client = await neon(process.env.DATABASE_URL!);
+		client = await neon(process.env.DATABASE_URL as string);
 	}
 	return client;
 }
